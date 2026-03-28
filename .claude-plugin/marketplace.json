@@ -1,0 +1,18 @@
+{
+  "name": "tree-ia-dev-plugin",
+  "owner": {
+    "name": "Tree IA",
+    "url": "https://github.com/tree-ia"
+  },
+  "metadata": {
+    "description": "Tree IA development workflow plugins"
+  },
+  "plugins": [
+    {
+      "name": "tree-dev",
+      "source": "./",
+      "description": "Structured development workflow — agents, skills and hooks for multi-layer projects",
+      "version": "1.0.0"
+    }
+  ]
+}

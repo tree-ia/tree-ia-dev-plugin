@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "REGRAS INEGOCIÁVEIS:\n1. Pesquise o codebase ANTES de implementar. Leia arquivos existentes.\n2. Sem enrolação — vá direto ao ponto. Sem resumos do que acabou de fazer.\n3. Nunca implemente sem plano aprovado. Apresente o plano primeiro, a menos que eu peça para implementar direto.\n4. Rode build/tests antes de declarar qualquer coisa como pronta.\n5. Faça commits conforme os blocos de implementação forem sendo finalizados."
+          }
+        ]
+      }
+    ]
+  }
+}

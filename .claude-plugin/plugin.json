@@ -1,0 +1,11 @@
+{
+  "name": "tree-dev",
+  "version": "1.0.0",
+  "description": "Structured development workflow — agents, skills and hooks for multi-layer projects",
+  "author": {
+    "name": "Tree IA",
+    "url": "https://github.com/tree-ia"
+  },
+  "license": "MIT",
+  "keywords": ["workflow", "agents", "planning", "code-review", "monorepo", "fullstack"]
+}
