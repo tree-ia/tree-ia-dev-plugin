@@ -17,9 +17,10 @@ Claude Code is powerful but defaults to jumping straight into implementation. Th
 | `researcher` | Opus | Deeply investigates a domain, technology, or architecture area before planning | No |
 | `backend` | Opus | Implements server-side code — APIs, services, database, queues | Yes |
 | `frontend` | Opus | Implements client-side code — pages, components, styles, UI | Yes |
+| `security` | Opus | Audits code for vulnerabilities, auth flaws, data exposure, and attack surfaces | No |
 | `qa` | Opus | Runs build, tests, reviews code quality, validates against plan | No |
 
-- **researcher** and **qa** are read-only by design — they find problems and gather knowledge, they don't write code.
+- **researcher**, **security**, and **qa** are read-only by design — they analyze and report, they don't write code.
 - **backend** and **frontend** have strict file ownership — they never touch each other's files.
 - All agents start by reading the project's `CLAUDE.md` to adapt to the stack.
 
@@ -68,6 +69,7 @@ Plugin agents:
   tree-dev:researcher · opus
   tree-dev:backend · opus
   tree-dev:frontend · opus
+  tree-dev:security · opus
   tree-dev:qa · opus
 ```
 
@@ -92,6 +94,9 @@ backend + frontend agents (parallel when possible)
     ├─ commits per logical block
     │
     ▼
+security agent ──→ vulnerability audit (when auth/payments/data involved)
+    │
+    ▼
 qa agent ──→ build + code review + plan compliance
     │
     ▼
@@ -104,7 +109,7 @@ Not every task needs every step. A single-file bug fix skips straight to impleme
 
 - **Stack-agnostic** — agents read `CLAUDE.md` and adapt. Works with Next.js, Express, NestJS, React Native, Hono, or whatever your project uses.
 - **File ownership** — backend and frontend agents have strict boundaries. No conflicts, no overwrites.
-- **Read-only review** — researcher and qa agents cannot edit files. Separation of concerns.
+- **Read-only review** — researcher, security, and qa agents cannot edit files. Separation of concerns.
 - **Plan before code** — the default behavior. Skip it explicitly when you want to go fast.
 - **Evidence over claims** — "should work" is not accepted. Build must pass.
 - **Conditional spawning** — only the agents the task actually needs are spawned. Backend-only change? No frontend agent.
