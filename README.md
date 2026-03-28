@@ -47,9 +47,16 @@ Claude Code is powerful but defaults to jumping straight into implementation. Th
 
 ### From marketplace (recommended)
 
-Add the marketplace, then install:
+Add the marketplace and install in one go:
 
 ```bash
+claude plugin marketplace add tree-ia/tree-ia-dev-plugin
+claude plugin install tree-dev@tree-ia/tree-ia-dev-plugin
+```
+
+Or interactively inside Claude Code:
+
+```
 /plugin marketplace add tree-ia/tree-ia-dev-plugin
 /plugin install tree-dev@tree-ia/tree-ia-dev-plugin
 ```
@@ -62,7 +69,11 @@ claude --plugin-dir /path/to/tree-ia-dev-plugin
 
 ### Verify installation
 
-After installing, run `claude agents` — you should see:
+```bash
+claude agents
+```
+
+You should see:
 
 ```
 Plugin agents:
@@ -71,6 +82,46 @@ Plugin agents:
   tree-dev:frontend · opus
   tree-dev:security · opus
   tree-dev:qa · opus
+```
+
+## Useful CLI combinations
+
+The plugin works out of the box, but these flags complement it well:
+
+```bash
+# Standard session (plugin loads automatically after install)
+claude
+
+# Parallel work — isolated git worktree per feature
+claude -w feature-auth
+claude -w feature-payments --tmux    # split panes with tmux
+
+# Continue where you left off
+claude -c                            # most recent session
+claude -r "session-name"             # resume by name
+
+# Name your session for easy resuming
+claude -n "auth-refactor"
+
+# Use Sonnet for quick tasks (overrides plugin's Opus default for main session)
+claude --model sonnet
+
+# Headless / CI — non-interactive with budget cap
+claude -p --max-turns 10 --max-budget-usd 5.00 "run tests and report"
+
+# Restrict tools for read-only exploration
+claude --tools "Read,Glob,Grep,Bash"
+```
+
+### Shell aliases (optional)
+
+Add to your `~/.zshrc` or `~/.bashrc` for convenience:
+
+```bash
+alias cc='claude'
+alias ccw='claude -w'
+alias ccn='claude -n'
+alias ccc='claude -c'
 ```
 
 ## Workflow
