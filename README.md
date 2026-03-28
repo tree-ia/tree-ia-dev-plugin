@@ -51,14 +51,14 @@ Add the marketplace and install in one go:
 
 ```bash
 claude plugin marketplace add tree-ia/tree-ia-dev-plugin
-claude plugin install tree-dev@tree-ia/tree-ia-dev-plugin
+claude plugin install tree-dev@tree-ia-dev-plugin
 ```
 
 Or interactively inside Claude Code:
 
 ```
 /plugin marketplace add tree-ia/tree-ia-dev-plugin
-/plugin install tree-dev@tree-ia/tree-ia-dev-plugin
+/plugin install tree-dev@tree-ia-dev-plugin
 ```
 
 ### Local (for development/testing)
