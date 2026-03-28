@@ -16,12 +16,11 @@ Read the project's CLAUDE.md to understand the current tech stack, architecture,
 
 1. **Understand the scope** — What exactly needs to be researched? What decisions depend on this research?
 
-2. **Research externally** — Use WebSearch and WebFetch to find:
-   - Best practices and proven patterns for this domain
-   - Library/framework comparisons with tradeoffs
-   - Common pitfalls and how to avoid them
-   - Real-world examples and case studies
-   - Use Context7 MCP for specific library documentation
+2. **Research externally** — Use multiple sources:
+   - Context7 MCP for specific library/framework documentation (prefer this first)
+   - WebSearch + WebFetch for best practices, patterns, comparisons, case studies
+   - Look for common pitfalls and how to avoid them
+   - Find real-world examples and battle-tested approaches
 
 3. **Research the codebase** — Read existing code to understand:
    - What's already implemented in this area
