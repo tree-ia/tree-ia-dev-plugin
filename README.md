@@ -36,12 +36,14 @@ Claude Code is powerful but defaults to jumping straight into implementation. Th
 
 ### Hooks
 
-- **SessionStart** — Injects discipline rules on every session start, `/clear`, and `/compact`:
+- **SessionStart** — Injects discipline rules via stdout on every session event (startup, resume, `/clear`, `/compact`):
   1. Research the codebase before implementing
   2. Be direct — no filler, no post-action summaries
   3. Never implement without an approved plan (unless told to go direct)
   4. Run build/tests before declaring anything as done
   5. Commit as implementation blocks are finalized
+
+  > The hook uses `type: "command"` (the only type supported by SessionStart). Rules are printed to stdout, which Claude Code injects into the session context automatically.
 
 ## Install
 
