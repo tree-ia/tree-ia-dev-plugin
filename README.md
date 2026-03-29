@@ -34,16 +34,37 @@ Claude Code is powerful but defaults to jumping straight into implementation. Th
 | `debugging` | Investigating bugs or unexpected behavior — systematic root-cause analysis |
 | `security-audit` | Code handles auth, payments, user data, or exposes API endpoints |
 
-### Hooks
+### Discipline rules (optional)
 
-- **SessionStart** — Injects discipline rules via stdout on every session event (startup, resume, `/clear`, `/compact`):
-  1. Research the codebase before implementing
-  2. Be direct — no filler, no post-action summaries
-  3. Never implement without an approved plan (unless told to go direct)
-  4. Run build/tests before declaring anything as done
-  5. Commit as implementation blocks are finalized
+The plugin recommends injecting these rules into every session via `--append-system-prompt`:
 
-  > The hook uses `type: "command"` (the only type supported by SessionStart). Rules are printed to stdout, which Claude Code injects into the session context automatically.
+```
+NON-NEGOTIABLE RULES:
+1. Research the codebase BEFORE implementing. Read existing files first.
+2. Be direct — get to the point. No post-action summaries.
+3. Never implement without an approved plan. Present the plan first, unless told to implement directly.
+4. Run build/tests before declaring anything as done.
+5. Commit as implementation blocks are finalized.
+```
+
+To use it, create a shell alias in your `~/.zshrc` (or `~/.bashrc`):
+
+```bash
+alias claude='claude --append-system-prompt "NON-NEGOTIABLE RULES:
+1. Research the codebase BEFORE implementing. Read existing files first.
+2. Be direct — get to the point. No post-action summaries.
+3. Never implement without an approved plan. Present the plan first, unless told to implement directly.
+4. Run build/tests before declaring anything as done.
+5. Commit as implementation blocks are finalized."'
+```
+
+Then reload your shell:
+
+```bash
+source ~/.zshrc
+```
+
+From now on, every `claude` session will have the discipline rules injected automatically.
 
 ## Install
 

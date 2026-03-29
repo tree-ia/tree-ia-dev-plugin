@@ -1,15 +1,3 @@
 {
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "printf 'NON-NEGOTIABLE RULES:\\n1. Research the codebase BEFORE implementing. Read existing files first.\\n2. Be direct — get to the point. No post-action summaries.\\n3. Never implement without an approved plan. Present the plan first, unless told to implement directly.\\n4. Run build/tests before declaring anything as done.\\n5. Commit as implementation blocks are finalized.\\n'"
-          }
-        ]
-      }
-    ]
-  }
+  "hooks": {}
 }
