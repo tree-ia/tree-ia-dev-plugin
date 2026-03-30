@@ -30,8 +30,14 @@ description: Use before any implementation task that touches 2+ files or multipl
    - What: description
    - Depends on: subtask N (or "none")
 
-   ### Execution order
-   1. [sequential/parallel grouping]
+   ### Execution batches
+   Batch 1 (parallel): subtasks 1, 2
+   Batch 2 (sequential, depends on batch 1): subtask 3
+   Batch 3 (parallel): subtasks 4, 5
+
+   ### TDD applicability
+   - [which subtasks should follow RED-GREEN-REFACTOR]
+   - [which subtasks can skip TDD and why]
 
    ### Risks / decisions needed
    - [anything requiring user input]
@@ -39,4 +45,4 @@ description: Use before any implementation task that touches 2+ files or multipl
 
 4. **Wait for approval** — Do NOT proceed until user approves or requests changes.
 
-5. **Execute** — Spawn agents per the plan. Commit after each logical block is finalized.
+5. **Hand off to execute-plan** — Once approved, activate the execute-plan skill to dispatch agents in batches with checkpoints. Do not manually orchestrate execution.

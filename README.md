@@ -6,7 +6,7 @@ Built by [Tree IA](https://tree.ia.br).
 
 ## Why
 
-Claude Code is powerful but defaults to jumping straight into implementation. This plugin enforces a **research → plan → implement → review** cycle through agents with clear boundaries and skills that gate each phase. The result: fewer wasted tokens, cleaner code, and better architectural decisions.
+Claude Code is powerful but defaults to jumping straight into implementation. This plugin enforces a **research → plan → implement → review → verify → finalize** cycle through agents with clear boundaries and skills that gate each phase. The result: fewer wasted tokens, cleaner code, and better architectural decisions.
 
 ## What's included
 
@@ -30,7 +30,12 @@ Claude Code is powerful but defaults to jumping straight into implementation. Th
 |-------|---------|
 | `brainstorm` | Requirements are vague, multiple approaches exist, or scope needs refinement |
 | `plan-first` | Task touches 2+ files or crosses layers (DB, API, frontend) |
-| `verification` | Before declaring any task as done — requires fresh build/test evidence |
+| `tdd` | Implementing features or fixing bugs where tests are possible — enforces RED-GREEN-REFACTOR |
+| `execute-plan` | After plan-first produces an approved plan — dispatches agents in batches with checkpoints |
+| `git-worktree` | Feature touches 3+ files — creates isolated branch before implementation |
+| `code-review` | After implementation — spec compliance, quality review, and feedback incorporation |
+| `verification` | Before declaring any task as done — requires build, tests, coverage, and plan compliance |
+| `finalize` | After verification passes — merge/PR decision and cleanup |
 | `debugging` | Investigating bugs or unexpected behavior — systematic root-cause analysis |
 | `security-audit` | Code handles auth, payments, user data, or exposes API endpoints |
 
@@ -157,24 +162,35 @@ You send a task
     ├─ Need research? ──→ researcher agent ──→ expert knowledge
     │
     ▼
-plan-first skill ──→ decompose into subtasks + file ownership
+plan-first skill ──→ decompose into subtasks + batch grouping
     │
     ▼
 You approve (or adjust) the plan
     │
     ▼
-backend + frontend agents (parallel when possible)
+git-worktree skill ──→ isolated branch + baseline verification
     │
-    ├─ commits per logical block
+    ▼
+execute-plan skill ──→ dispatch agents per batch
+    │  ├─ tdd cycle (per agent, when applicable)
+    │  ├─ checkpoint between batches (user reviews)
+    │  └─ commit per batch
+    │
+    ▼
+code-review skill ──→ spec compliance + quality review
+    │  └─ feedback incorporation ──→ agents fix approved issues
     │
     ▼
 security agent ──→ vulnerability audit (when auth/payments/data involved)
     │
     ▼
-qa agent ──→ build + code review + plan compliance
+qa agent ──→ build + full test suite + plan compliance
     │
     ▼
-verification skill ──→ evidence-based completion
+verification skill ──→ evidence-based completion (build + tests + coverage)
+    │
+    ▼
+finalize skill ──→ merge / PR / keep branch
 ```
 
 Not every task needs every step. A single-file bug fix skips straight to implementation. A full-stack feature uses the complete pipeline.
@@ -184,8 +200,11 @@ Not every task needs every step. A single-file bug fix skips straight to impleme
 - **Stack-agnostic** — agents read `CLAUDE.md` and adapt. Works with Next.js, Express, NestJS, React Native, Hono, or whatever your project uses.
 - **File ownership** — backend and frontend agents have strict boundaries. No conflicts, no overwrites.
 - **Read-only review** — researcher, security, and qa agents cannot edit files. Separation of concerns.
+- **Test-first** — TDD skill enforces RED-GREEN-REFACTOR when tests are possible.
 - **Plan before code** — the default behavior. Skip it explicitly when you want to go fast.
-- **Evidence over claims** — "should work" is not accepted. Build must pass.
+- **Batch execution** — plans are executed in batches with checkpoints, not all at once.
+- **Evidence over claims** — "should work" is not accepted. Build must pass, tests must pass.
+- **Branch isolation** — features are developed in worktrees, main stays clean.
 - **Conditional spawning** — only the agents the task actually needs are spawned. Backend-only change? No frontend agent.
 
 ## Customization
