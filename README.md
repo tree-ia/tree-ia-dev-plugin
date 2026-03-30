@@ -50,6 +50,7 @@ NON-NEGOTIABLE RULES:
 3. Never implement without an approved plan. Present the plan first, unless told to implement directly.
 4. Run build/tests before declaring anything as done.
 5. Commit as implementation blocks are finalized.
+6. Before starting any task, check available skills and activate the ones that match the context. Use them proactively — do not wait for the user to invoke them.
 ```
 
 To use it, create a shell alias in your `~/.zshrc` (or `~/.bashrc`):
@@ -60,7 +61,8 @@ alias claude='claude --append-system-prompt "NON-NEGOTIABLE RULES:
 2. Be direct — get to the point. No post-action summaries.
 3. Never implement without an approved plan. Present the plan first, unless told to implement directly.
 4. Run build/tests before declaring anything as done.
-5. Commit as implementation blocks are finalized."'
+5. Commit as implementation blocks are finalized.
+6. Before starting any task, check available skills and activate the ones that match the context. Use them proactively — do not wait for the user to invoke them."'
 ```
 
 Then reload your shell:
